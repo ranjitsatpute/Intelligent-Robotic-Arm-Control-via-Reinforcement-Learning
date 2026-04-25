@@ -38,7 +38,7 @@ The agent operates in a continuous state and action space, learning to coordinat
 The agent was trained for **8,500+ episodes**. It demonstrates a clear "S-curve" learning trajectory, mastering the task after an initial exploration phase.
 
 <div align="center">
-<img src="assets/training_graph.png" width="800" alt="Training Graph">
+<img src="Assets/training_graph.png" width="800" alt="Training Graph">
 </div>
 
 ---
