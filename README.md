@@ -88,6 +88,7 @@ python main.py
 
 The solution uses an **Actor-Critic** architecture with **Twin Delayed** stabilization:
 
+```mermaid
 graph TD
     %% 1. INTERACTION LOOP (The "What Happened" Phase)
     subgraph Environment_Interaction [Interaction Phase]
@@ -107,7 +108,6 @@ graph TD
     subgraph Learning_System [Training Phase - TD3]
         direction TB
         
-        %% Critic Section
         subgraph Critic_Setup [Value Estimation]
             Batch(Sample Mini-Batch)
             Critic1[Critic 1 Network]
@@ -116,7 +116,6 @@ graph TD
             LossC(Minimize MSE Loss)
         end
         
-        %% Actor Section
         subgraph Actor_Setup [Policy Optimization]
             Actor[Actor Network]
             TargetA[Target Actor]
@@ -124,38 +123,36 @@ graph TD
         end
     end
 
-    %% --- CONNECTIONS & FLOW ---
+    Env --> State
+    State --> Actor
+    Actor --> Action
+    Action --> Env
+    Env --> Reward
 
-    %% 1. Interaction Flow
-    Env -->|Generates| State
-    State -->|Input to| Actor
-    Actor -->|Add Exploration Noise| Action
-    Action -->|Execute| Env
-    Env -->|Feedback| Reward
+    State --> Buffer
+    Action --> Buffer
+    Reward --> Buffer
 
-    %% 2. Storage Flow
-    State & Action & Reward -->|Store Transition| Buffer
-
-    %% 3. Training Flow
-    Buffer -->|Random Batch 256| Batch
+    Buffer --> Batch
     
-    %% Critic Update (Twin Delayed)
-    Batch --> Critic1 & Critic2
-    Batch --> TargetC & TargetA
-    TargetA -->|Next Action| TargetC
-    TargetC -->|Target Q-Value| LossC
-    LossC -->|Backpropagate| Critic1 & Critic2
+    Batch --> Critic1
+    Batch --> Critic2
+    Batch --> TargetC
+    Batch --> TargetA
 
-    %% Actor Update (Delayed)
+    TargetA --> TargetC
+    TargetC --> LossC
+    LossC --> Critic1
+    LossC --> Critic2
+
     Batch --> Actor
-    Actor -->|Proposed Action| Critic1
-    Critic1 -->|Policy Gradient| LossA
-    LossA -->|Backpropagate| Actor
+    Actor --> Critic1
+    Critic1 --> LossA
+    LossA --> Actor
 
-    %% Stability (Polyak Averaging)
-    Actor -.->|Soft Update| TargetA
-    Critic1 & Critic2 -.->|Soft Update| TargetC
-
+    Actor -.-> TargetA
+    Critic1 -.-> TargetC
+    Critic2 -.-> TargetC
 ## 🔗 References
 *   [TD3 Paper (Fujimoto et al.)](https://arxiv.org/abs/1802.09477)
 *   [Robosuite Documentation](https://robosuite.ai/)
