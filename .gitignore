@@ -1,1 +1,11 @@
-
+venv/
+logs/
+tmp/
+__pycache__/
+*.pyc
+.idea/
+.vscode/
+*.txt
+!checkpoint.txt
+!best_score.txt
+robosuite.log
