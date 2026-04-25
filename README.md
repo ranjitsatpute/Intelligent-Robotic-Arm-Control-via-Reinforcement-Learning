@@ -170,5 +170,5 @@ graph TD
 *   [Robosuite Documentation](https://robosuite.ai/)
 
 <div align="center">
-<sub>Built by Omkar Kale</sub>
+<sub>Built by Ranjit Satpute</sub>
 </div>
