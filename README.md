@@ -88,76 +88,74 @@ python main.py
 
 The solution uses an **Actor-Critic** architecture with **Twin Delayed** stabilization:
 
-```mermaid
 graph TD
-   %% 1. INTERACTION LOOP (The "What Happened" Phase)
-   subgraph Environment_Interaction [Interaction Phase]
-       direction TB
-       Env[Robosuite Environment]
-       State[State Vector]
-       Action[Action + Noise]
-       Reward[Reward Signal]
-   end
+    %% 1. INTERACTION LOOP (The "What Happened" Phase)
+    subgraph Environment_Interaction [Interaction Phase]
+        direction TB
+        Env[Robosuite Environment]
+        State[State Vector]
+        Action[Action + Noise]
+        Reward[Reward Signal]
+    end
 
-   %% 2. MEMORY (The "Remember" Phase)
-   subgraph Memory_System [Memory Phase]
-       Buffer[(Replay Buffer<br>Capacity 1M)]
-   end
+    %% 2. MEMORY (The "Remember" Phase)
+    subgraph Memory_System [Memory Phase]
+        Buffer[(Replay Buffer<br>Capacity 1M)]
+    end
 
-   %% 3. LEARNING (The "Improve" Phase)
-   subgraph Learning_System [Training Phase - TD3]
-       direction TB
-       
-       %% Critic Section
-       subgraph Critic_Setup [Value Estimation]
-           Batch(Sample Mini-Batch)
-           Critic1[Critic 1 Network]
-           Critic2[Critic 2 Network]
-           TargetC[Target Critics]
-           LossC(Minimize MSE Loss)
-       end
-       
-       %% Actor Section
-       subgraph Actor_Setup [Policy Optimization]
-           Actor[Actor Network]
-           TargetA[Target Actor]
-           LossA(Maximize Q-Value)
-       end
-   end
+    %% 3. LEARNING (The "Improve" Phase)
+    subgraph Learning_System [Training Phase - TD3]
+        direction TB
+        
+        %% Critic Section
+        subgraph Critic_Setup [Value Estimation]
+            Batch(Sample Mini-Batch)
+            Critic1[Critic 1 Network]
+            Critic2[Critic 2 Network]
+            TargetC[Target Critics]
+            LossC(Minimize MSE Loss)
+        end
+        
+        %% Actor Section
+        subgraph Actor_Setup [Policy Optimization]
+            Actor[Actor Network]
+            TargetA[Target Actor]
+            LossA(Maximize Q-Value)
+        end
+    end
 
-   %% --- CONNECTIONS & FLOW ---
+    %% --- CONNECTIONS & FLOW ---
 
-   %% 1. Interaction Flow
-   Env -->|Generates| State
-   State -->|Input to| Actor
-   Actor -->|Add Exploration Noise| Action
-   Action -->|Execute| Env
-   Env -->|Feedback| Reward
+    %% 1. Interaction Flow
+    Env -->|Generates| State
+    State -->|Input to| Actor
+    Actor -->|Add Exploration Noise| Action
+    Action -->|Execute| Env
+    Env -->|Feedback| Reward
 
-   %% 2. Storage Flow
-   State & Action & Reward -->|Store Transition| Buffer
+    %% 2. Storage Flow
+    State & Action & Reward -->|Store Transition| Buffer
 
-   %% 3. Training Flow
-    Buffer -->|Random Batch (256)| Batch
+    %% 3. Training Flow
     Buffer -->|Random Batch 256| Batch
-   
-   %% Critic Update (Twin Delayed)
-   Batch --> Critic1 & Critic2
-   Batch --> TargetC & TargetA
-   TargetA -->|Next Action| TargetC
-   TargetC -->|Target Q-Value| LossC
-   LossC -->|Backpropagate| Critic1 & Critic2
+    
+    %% Critic Update (Twin Delayed)
+    Batch --> Critic1 & Critic2
+    Batch --> TargetC & TargetA
+    TargetA -->|Next Action| TargetC
+    TargetC -->|Target Q-Value| LossC
+    LossC -->|Backpropagate| Critic1 & Critic2
 
-   %% Actor Update (Delayed)
-   Batch --> Actor
-   Actor -->|Proposed Action| Critic1
-   Critic1 -->|Policy Gradient| LossA
-   LossA -->|Backpropagate| Actor
+    %% Actor Update (Delayed)
+    Batch --> Actor
+    Actor -->|Proposed Action| Critic1
+    Critic1 -->|Policy Gradient| LossA
+    LossA -->|Backpropagate| Actor
 
-   %% Stability (Polyak Averaging)
-   Actor -.->|Soft Update| TargetA
-   Critic1 & Critic2 -.->|Soft Update| TargetC
-```
+    %% Stability (Polyak Averaging)
+    Actor -.->|Soft Update| TargetA
+    Critic1 & Critic2 -.->|Soft Update| TargetC
+
 
 *   **Actor:** Maps states to continuous actions (Joint Velocities).
 *   **Critic (x2):** Estimates the Q-value of state-action pairs (Twin Critics to reduce bias).
