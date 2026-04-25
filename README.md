@@ -153,6 +153,7 @@ graph TD
     Actor -.-> TargetA
     Critic1 -.-> TargetC
     Critic2 -.-> TargetC
+```
 ## 🔗 References
 *   [TD3 Paper (Fujimoto et al.)](https://arxiv.org/abs/1802.09477)
 *   [Robosuite Documentation](https://robosuite.ai/)
