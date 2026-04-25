@@ -10,7 +10,7 @@
 
 <br>
 
-![Demo](assets/demo.gif)
+![Demo](Assets/demo.gif)
 
 **Training a Franka Emika Panda robot to open a door using the Twin Delayed DDPG (TD3) algorithm.**
 
