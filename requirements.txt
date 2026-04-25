@@ -1,1 +1,7 @@
-
+numpy==1.26.4
+torch>=2.0.0
+robosuite
+gym==0.26.2
+tensorboard
+imageio
+imageio-ffmpeg
