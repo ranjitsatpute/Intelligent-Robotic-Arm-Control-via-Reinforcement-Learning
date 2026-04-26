@@ -29,7 +29,7 @@ The robot learns to:
 - Rotate it  
 - Open the door  
 
-All from scratch — without demonstrations.
+All from scratch without demonstrations.
 
 ---
 
@@ -95,7 +95,7 @@ The model was trained for **8500+ episodes**, showing a clear progression from e
 ### 1. Clone Repository
 ```bash
 git clone https://github.com/ranjitsatpute/Intelligent-Robotic-Arm-Control-via-Reinforcement-Learning.git
-cd Autonomous-Robotic-Arm-Control-using-Reinforcement-Learning
+cd Intellignet-Robotic-Arm-Control-via-Reinforcement-Learning
 ```
 
 ### 2. Setup Environment
