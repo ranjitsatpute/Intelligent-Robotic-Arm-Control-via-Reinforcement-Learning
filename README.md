@@ -47,7 +47,7 @@ The agent was trained for **8,500+ episodes**. It demonstrates a clear "S-curve"
 
 1.  **Clone the Repo**:
 ```bash
-git clone https://github.com/Omkarkkale/Autonomous-Robotic-Arm-Control-using-Reinforcement-Learning.git
+git clone https://github.com/ranjitsatpute/Intelligent-Robotic-Arm-Control-via-Reinforcement-Learning.git
 cd Autonomous-Robotic-Arm-Control-using-Reinforcement-Learning
 ```
 
