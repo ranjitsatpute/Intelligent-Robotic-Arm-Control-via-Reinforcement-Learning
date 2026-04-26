@@ -73,10 +73,6 @@ The model was trained for **8500+ episodes**, showing a clear progression from e
 ## 🏗️ Project Structure
 
 ```
-## 🏗️ Project Structure
-## 🏗️ Project Structure
-
-```
 .
 ├── Assets/             # Demo GIFs, training graphs
 ├── .gitignore          # Git ignore rules
@@ -91,6 +87,7 @@ The model was trained for **8500+ episodes**, showing a clear progression from e
 ├── td3_torch.py        # TD3 algorithm implementation
 └── test.py             # Run trained agent
 ```
+
 ---
 
 ## ⚡ Getting Started
