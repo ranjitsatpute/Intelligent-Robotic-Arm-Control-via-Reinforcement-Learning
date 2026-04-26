@@ -73,15 +73,22 @@ The model was trained for **8500+ episodes**, showing a clear progression from e
 ## 🏗️ Project Structure
 
 ```
+## 🏗️ Project Structure
+
+```
 .
-├── Assets/            # GIFs, graphs
-├── logs/              # TensorBoard logs
-├── models/            # Saved weights
-├── main.py            # Training entry point
-├── test.py            # Run trained agent
-├── td3.py             # TD3 implementation
-├── buffer.py          # Replay buffer
-└── README.md
+├── Assets/             # Demo GIFs, training graphs
+├── .gitignore          # Git ignore rules
+├── README.md           # Project documentation
+├── best_score.txt      # Stores best achieved reward
+├── buffer.py           # Replay buffer implementation
+├── capture_demo.py     # Script to record demo videos
+├── checkpoint.txt      # Training checkpoint tracking
+├── main.py             # Training entry point
+├── networks.py         # Actor & Critic neural networks
+├── requirements.txt    # Dependencies
+├── td3_torch.py        # TD3 algorithm implementation
+└── test.py             # Run trained agent
 ```
 
 ---
