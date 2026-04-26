@@ -11,8 +11,8 @@ if __name__ == '__main__':
         os.makedirs('assets')
     
     # Copy the training graph (Hardcoded path from user upload)
-    src_graph = "C:/Users/omkar/.gemini/antigravity/brain/76a8a41f-1b47-4eec-842b-82bd64abf900/uploaded_image_1766981168998.png"
-    dst_graph = "assets/training_graph.png"
+    src_graph = "C:\Users\Ranjit Satpute\PycharmProjects\lessons\td3-robosuite-door>76a8a41f-1b47-4eec-842b-82bd64abf900/uploaded_image_1766981168998.png"
+    dst_graph = "Assets/training_graph.png"
     import shutil
     try:
         shutil.copy(src_graph, dst_graph)
@@ -73,7 +73,7 @@ if __name__ == '__main__':
         frames.append(frame)
 
         observation = next_observation
-        if done:
+        if done:            
             break
 
     # Write frames twice to repeat the action
